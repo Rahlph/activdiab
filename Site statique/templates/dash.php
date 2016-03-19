@@ -87,7 +87,176 @@
                         <h3 class="panel-title"><i class="fa fa-bar-chart-o fa-fw"></i>Glycémie</h3>
                     </div>
                     <div class="panel-body center-block">
-                            <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+                        <script type="text/javascript" src="/assets/script/canvasjs.min.js"></script>
+                        <script type="text/javascript" src="./assets/script/jquery.canvasjs.min.js"></script>
+                        <script type="text/javascript">
+
+
+                            function getWeek(el)
+                            {
+                                el.options.axisX.minimum = new Date(new Date().getTime() - 7 * 24 * 60 * 60 * 1000);
+
+                                el.options.axisX.maximum = new Date().getTime();
+                                el.options.axisX.title =  "Temps (semaine)";
+                                el.options.axisX.intervalType = "day";
+                                el.render();
+                            }
+
+                            function getMonth(el)
+                            {
+                                el.options.axisX.minimum = new Date(new Date().getTime() - 4*7 * 24 * 60 * 60 * 1000);
+
+                                el.options.axisX.maximum = new Date().getTime();
+                                el.options.axisX.title =  "Temps (mois)";
+                                el.options.axisX.intervalType = "week";
+                                el.render();
+                            }
+
+                            function getDay(el)
+                            {
+                                el.options.axisX.minimum = new Date(new Date().getTime() - 24 * 60 * 60 * 1000);
+
+                                el.options.axisX.maximum = new Date().getTime();
+                                el.options.axisX.title =  "Temps (jour)";
+                                el.options.axisX.intervalType = "day";
+                                el.render();
+                            }
+                            var chart = "";
+                            window.onload = function () {
+                                chart = new CanvasJS.Chart("chartContainer",
+                                    {
+                                        title: {
+                                            text: "Evolution de la glycémie"
+                                        },
+                                        animationEnabled: true,
+                                        axisX:{
+                                            valueFormatString: "DD-MMM" ,
+                                            //interval: 1,
+                                            title: "Temps (semaine)",
+                                            intervalType: "week",
+                                            labelAngle: -50,
+                                            labelFontColor: "rgb(0,75,141)",
+                                            minimum: new Date(2012,06,10),
+                                            maximum: new Date(2012,07,17),
+                                        },
+                                        axisY: {
+                                            title: "Glycémie (g/L)",
+                                            interlacedColor: "#F0FFFF",
+                                            tickColor: "azure",
+                                            titleFontColor: "rgb(0,75,141)",
+                                            //valueFormatString: "#M,,.",
+                                            //interval: 100000000
+                                        },
+                                        data: [
+                                            {
+                                                indexLabelFontColor: "darkSlateGray",
+                                                name: 'views',
+                                                type: "area",
+                                                color: "rgba(0,75,141,0.7)",
+                                                markerSize:8,
+                                                dataPoints: [
+
+                                                ]
+                                            }
+
+                                        ]
+                                    });
+
+                                chart.render();
+
+                                /****************
+
+                                 RANDOM VALUES
+
+                                 ****************/
+
+
+
+                                var tmp_data = [];
+                                var tmp_time = new Date().getTime();
+                                for (var i = 0; i < 1400;i++)
+                                {
+
+
+                                    tmp_data[i] = { x: new Date(tmp_time - i * 0.5 * 24 * 60 * 60 * 1000), y: (Math.random() * 3) + 0.25};
+                                    if (tmp_data[i].y < 0.5)
+                                    {
+                                        tmp_data[i].markerColor =  "red";
+//tmp_data[i].markerType = "triangle";
+                                    }
+//chart.options.data.dataPoints[i] = { x: new Date(tmp_time - i * 7 * 24 * 60 * 60 * 1000), y: Math.floor((Math.random() * 3)) + 1};
+//tmp_time = new Date(tmp_time.getTime() - 7 * 24 * 60 * 60 * 1000);
+
+                                }
+
+                                chart.options.data[0].dataPoints = tmp_data;
+                                /*
+                                 var firstDay = new Date(chart.options.axisX.minimum);
+                                 var nextWeek = new Date(firstDay.getTime() + 4 * 7 * 24 * 60 * 60 * 1000);
+                                 chart.options.axisX.minimum = firstDay;
+                                 chart.options.axisX.maximum = nextWeek;
+                                 */
+
+                                chart.options.axisX.minimum =Date(new Date().getTime() - 100 * 7 * 24 * 60 * 60 * 1000);
+
+                                chart.options.axisX.maximum = new Date().getTime();
+
+                                chart.options.axisY.minimum = 0;
+                                chart.options.axisY.maximum = 5;
+                                chart.render();
+
+
+                                /*******************
+
+                                 Select range
+
+                                 *******************/
+
+//chart.options.axisX.minimum = new Date(new Date().getTime() - 7 * 24 * 60 * 60 * 1000);
+                                /*
+                                 chart.options.axisX.maximum = new Date().getTime();
+                                 chart.options.axisX.title =  "Temps (semaine)";
+                                 chart.options.axisX.intervalType = "day";*/
+                                getWeek(chart);
+
+                            }
+
+                            function toTimestamp(strDate){
+                                var datum = Date.parse(strDate);
+                                return datum/1000;
+                            }
+                            function next(e)
+                            {
+                                var tmp = e.options.axisX.maximum ;
+                                var tmp2 = e.options.axisX.minimum;
+                                e.options.axisX.minimum -= tmp-tmp2;
+                                e.options.axisX.maximum -= tmp-tmp2;
+                                tmp = e.options.axisX.maximum ;
+                                tmp2 = e.options.axisX.minimum;
+                                e.options.axisX.minimum += tmp-tmp2;
+                                e.options.axisX.maximum += tmp-tmp2;
+                                e.options.axisX.minimum += tmp-tmp2;
+                                e.options.axisX.maximum += tmp-tmp2;
+                                e.render();
+                            }
+                            function previous(e)
+                            {
+                                var tmp = e.options.axisX.maximum ;
+                                var tmp2 = e.options.axisX.minimum;
+                                e.options.axisX.minimum -= tmp-tmp2;
+                                e.options.axisX.maximum -= tmp-tmp2;
+                                e.render();
+                            }
+                        </script>
+                        <div class="center-block">
+                            <button type="button" class="btn" onclick="getDay(chart);">Jour</button>
+                            <button type="button" class="btn" onclick="return getWeek(chart);">Semaine</button>
+                            <button type="button" class="btn " onclick="return getMonth(chart);">Mois</button>
+                            <button type="button" class="btn " onclick="next(chart);">Suivant</button>
+                            <button type="button" class="btn " onclick="previous(chart);">Précédent</button>
+                        </div>
+                        <div id="chartContainer" style="height: 300px; width: 100%;">
+                        </div>
 
                     </div>
                 </div>
@@ -105,67 +274,5 @@
 <!-- Bootstrap Core JavaScript -->
 <script src="js/bootstrap.min.js"></script>
 
-<script type="text/javascript">
-    $(function () {
-        $('#container').highcharts({
-            title: {
-                text: ''
-            },
-            yAxis: [{ // Primary yAxis
-                labels: {
-                    format: '{value}°C',
-                    style: {
-                        color: Highcharts.getOptions().colors[1]
-                    }
-                },
-                title: {
-                    text: 'Temperature',
-                    style: {
-                        color: Highcharts.getOptions().colors[1]
-                    }
-                }
-            }, { // Secondary yAxis
-                title: {
-                    text: 'Rainfall',
-                    style: {
-                        color: Highcharts.getOptions().colors[0]
-                    }
-                },
-                labels: {
-                    format: '{value} mm',
-                    style: {
-                        color: Highcharts.getOptions().colors[0]
-                    }
-                },
-                opposite: true
-            }],
-            series: [{
-                type: 'column',
-                name: 'Avant',
-                data: [3, 2, 1, 3, 4],
-                color: 'blue'
-            }, {
-                type: 'column',
-                name: 'Pendant',
-                data: [2, 3, 5, 7, 6],
-                color: 'blue'
-            }, {
-                type: 'column',
-                name: 'Après',
-                data: [4, 3, 3, 9, 0],
-                color: 'blue'
-            }, {
-                type: 'spline',
-                name: 'Glycémie',
-                data: [3, 2.67, 3, 6.33, 3.33],
-                marker: {
-                    lineWidth: 2,
-                    lineColor: Highcharts.getOptions().colors[3],
-                    fillColor: 'white'
-                }
-            }]
-        });
-    });
-</script>
 </body>
 </html>
