@@ -1,6 +1,18 @@
 
 <?php
-include("sql.config.php");
+try {
+$VALEUR_hote='localhost';
+$VALEUR_nom_bd='activdiab';
+$VALEUR_user='root';
+$VALEUR_mot_de_passe='Azerty01';
+$connexion = new PDO('mysql:host='.$VALEUR_hote.';dbname='.$VALEUR_nom_bd, $VALEUR_user, $VALEUR_mot_de_passe);
+}
+catch( PDOException $Exception ) {
+    // PHP Fatal Error. Second Argument Has To Be An Integer, But PDOException::getCode Returns A
+    // String.
+    throw new MyDatabaseException( $Exception->getMessage( ) , $Exception->getCode( ) );
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
