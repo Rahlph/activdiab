@@ -249,7 +249,7 @@ while( $resultat = $resultats->fetch() )
 {
         //echo 'Utilisateur : '.$resultat->glycemie.'<br>';
         //echo 'Utilisateur : '.$resultat->uniteInsuline.'<br>';
-	   echo "chart.options.data[0].dataPoints[".$i."] = { x: new Date(".$resultat->tmpstamp."), y: ".$resultat->glycemie."};";
+	   echo "chart.options.data[0].dataPoints[".$i."] = { x: new Date('".$resultat->tmpstamp."'), y: ".$resultat->glycemie."};";
 
 	//   echo 'if (chart.options.data[0].y < 0.5) {chart.options.data[0].dataPoints['.$i.'] =  "red";}';
 
