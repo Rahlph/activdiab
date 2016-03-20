@@ -40,7 +40,7 @@
     <!-- Top Menu Items -->
     <ul class="nav navbar-right top-nav">
         <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> John Doe <b
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> Hugo <b
                     class="caret"></b></a>
             <ul class="dropdown-menu">
                 <li>
@@ -136,6 +136,7 @@
                                             intervalType: "week",
                                             labelAngle: -50,
                                             labelFontColor: "rgb(0,75,141)",
+											labelFontSize: 20,
                                             minimum: new Date(2012,06,10),
                                             maximum: new Date(2012,07,17),
                                         },
@@ -153,7 +154,7 @@
                                                 name: 'views',
                                                 type: "area",
                                                 color: "rgba(0,75,141,0.7)",
-                                                markerSize:8,
+                                                markerSize:10,
                                                 dataPoints: [
 
                                                 ]
@@ -161,6 +162,85 @@
 
                                         ]
                                     });
+var chart2 = new CanvasJS.Chart("chartContainer2",
+		{
+			theme: "theme3",
+                        animationEnabled: true,
+			title:{
+				text: "Objectif calorique quotidien",
+				fontSize: 30
+			},
+			toolTip: {
+				shared: true
+			},			
+			axisY: {
+				title: "kilocalorie",
+                                            minimum: 0,
+                                            maximum: 127500,
+			},
+			axisY2: {
+				title: "Millier de pas",
+				
+                                            minimum: 0,
+                                            maximum: 15,
+			},		
+			data: [ 
+			{
+				type: "column",	
+				name: "Activité réalisée",
+				legendText: "Activité réalisée",
+				showInLegend: true, 
+				dataPoints:[
+				{label: "Lundi 14", y: 87571},
+				{label: "Mardi 15", y: 95856},
+				{label: "Mercredi 16", y: 78742},
+				{label: "Jeudi 17", y: 92258},
+				{label: "Vendredi 18", y: 83472},
+				{label: "Samedi 19", y: 88074},
+				{label: "Dimanche 20", y: 98023}
+
+				]
+			},
+			{
+				type: "column",	
+				name: "Objectif calorifique minimum recommandé (Poids : 85kg)",
+				legendText: "Objectif 10 000 Pas",
+				axisYType: "secondary",
+				                              color: "#00FF00",
+				showInLegend: true,
+				dataPoints:[
+				{label: "Lundi 14", y: 10},
+				{label: "Mardi 15", y: 10},
+				{label: "Mercredi 16", y: 10},
+				{label: "Jeudi 17", y: 10},
+				{label: "Vendredi 18", y: 10},
+				{label: "Samedi 19", y: 10},
+				{label: "Dimanche 20", y: 10}
+
+
+				]
+			}
+			
+			],
+          legend:{
+            cursor:"pointer",
+            itemclick: function(e){
+              if (typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
+              	e.dataSeries.visible = false;
+              }
+              else {
+                e.dataSeries.visible = true;
+              }
+            	chart2.render();
+            }
+          },
+        });
+
+chart.render();
+
+
+chart2.render();
+
 
                                 chart.render();
 
@@ -174,21 +254,32 @@
 
                                 var tmp_data = [];
                                 var tmp_time = new Date().getTime();
-                                for (var i = 0; i < 1400;i++)
+								var MAX_POINT = 1400;
+                                for (var i = 0; i < MAX_POINT;i++)
                                 {
 
 
-                                    tmp_data[i] = { x: new Date(tmp_time - i * 0.5 * 24 * 60 * 60 * 1000), y: (Math.random() * 3) + 0.25};
-                                    if (tmp_data[i].y < 0.5)
+                                    tmp_data[i] = { x: new Date(tmp_time - i * 0.5 * 24 * 60 * 60 * 1000), y: (Math.random() * 1) + 0.50};
+                                   // tmp_data[i] = { x: new Date(tmp_time - i * 0.5 * 24 * 60 * 60 * 1000), y: Math.cos(5*(MAX_POINT-i))*Math.exp(-0.3*(MAX_POINT-i))+1};
+                                    if (tmp_data[i].y < 0.75)
                                     {
                                         tmp_data[i].markerColor =  "red";
+                                        tmp_data[i].indexLabel =  "!";
 //tmp_data[i].markerType = "triangle";
                                     }
+									
+								 if (tmp_data[i].y > 1.4)
+                                    {
+                                        tmp_data[i].markerColor =  "yellow";
+                                        tmp_data[i].indexLabel =  "!";
+//tmp_data[i].markerType = "triangle";
+                                    }
+									
 //chart.options.data.dataPoints[i] = { x: new Date(tmp_time - i * 7 * 24 * 60 * 60 * 1000), y: Math.floor((Math.random() * 3)) + 1};
 //tmp_time = new Date(tmp_time.getTime() - 7 * 24 * 60 * 60 * 1000);
 
                                 }
-
+//tmp_data.reverse();
                                 chart.options.data[0].dataPoints = tmp_data;
                                 /*
                                  var firstDay = new Date(chart.options.axisX.minimum);
@@ -257,7 +348,8 @@
                         </div>
                         <div id="chartContainer" style="height: 300px; width: 100%;">
                         </div>
-
+                        <div id="chartContainer2" style="height: 300px; width: 100%;">
+                        </div>
                     </div>
                 </div>
             </div>
