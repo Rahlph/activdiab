@@ -51,12 +51,12 @@
                               <form class="sign-in-up-form" action="./sign-in.html" role="form">
                                  <!-- Input 1 -->
                                  <div class="form-group">
-                                    <input class="form-control" id="exampleInputEmail2" type="mail" placeholder="Saisir l'adresse mail">
+                                    <input class="form-control" id="exampleInputEmail2" type="mail" placeholder="Saisir l'adresse mail" value="hugo@patient.com">
                                  </div>
                                  <!-- /.form-group -->
                                  <!-- Input 2 -->
                                  <div class="form-group">
-                                    <input class="form-control" id="exampleInputPassword1" type="password" placeholder="Mot de passe">
+                                    <input class="form-control" id="exampleInputPassword1" type="password" placeholder="Mot de passe" value="hugopatient">
                                  </div>
                                  <!-- /.form-group -->
                                  <!-- Button -->
@@ -106,7 +106,7 @@
                <script src="javascript/assets/application.js"></script>
                <script type="text/javascript">
                   function checkLogin() {
-                  if((document.getElementById("exampleInputEmail2").value) != 'john.doe@patient.com') {
+                  if((document.getElementById("exampleInputEmail2").value) != 'hugo@patient.com') {
                   	sweetAlert(
                   		'Oops...',
                   		'Erreur d\'adresse mail ou de mot de passe !',
