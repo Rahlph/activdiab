@@ -165,6 +165,7 @@
 var chart2 = new CanvasJS.Chart("chartContainer2",
 		{
 			theme: "theme3",
+
                         animationEnabled: true,
 			title:{
 				text: "Objectif calorique quotidien",
@@ -174,9 +175,9 @@ var chart2 = new CanvasJS.Chart("chartContainer2",
 				shared: true
 			},			
 			axisY: {
-				title: "kilocalorie",
+				title: "Effort (kcal)",
                                             minimum: 0,
-                                            maximum: 127500,
+                                            maximum: 1275,
 			},
 			axisY2: {
 				title: "Millier de pas",
@@ -189,34 +190,28 @@ var chart2 = new CanvasJS.Chart("chartContainer2",
 				type: "column",	
 				name: "Activité réalisée",
 				legendText: "Activité réalisée",
-				showInLegend: true, 
+				showInLegend: false, 
 				dataPoints:[
-				{label: "Lundi 14", y: 87571},
-				{label: "Mardi 15", y: 95856},
-				{label: "Mercredi 16", y: 78742},
-				{label: "Jeudi 17", y: 92258},
-				{label: "Vendredi 18", y: 83472},
-				{label: "Samedi 19", y: 88074},
-				{label: "Dimanche 20", y: 98023}
+				{label: "Lundi 14", y: 875,color :  "green"},
+				{label: "Mardi 15", y: 955,color :  "green"},
+				{label: "Mercredi 16", y: 728,color :  "red"},
+				{label: "Jeudi 17", y: 925,color :  "green"},
+				{label: "Vendredi 18", y: 873,color :  "green"},
+				{label: "Samedi 19", y: 885,color :  "green"},
+				{label: "Dimanche 20", y: 521,color :  "yellow",indexLabel: "Acquisition en cours"}
 
 				]
 			},
 			{
 				type: "column",	
+	
 				name: "Objectif calorifique minimum recommandé (Poids : 85kg)",
 				legendText: "Objectif 10 000 Pas",
 				axisYType: "secondary",
-				                              color: "#00FF00",
+				        indexLabelFontSize: 25,
+				                              color: "green",
 				showInLegend: true,
 				dataPoints:[
-				{label: "Lundi 14", y: 10},
-				{label: "Mardi 15", y: 10},
-				{label: "Mercredi 16", y: 10},
-				{label: "Jeudi 17", y: 10},
-				{label: "Vendredi 18", y: 10},
-				{label: "Samedi 19", y: 10},
-				{label: "Dimanche 20", y: 10}
-
 
 				]
 			}
