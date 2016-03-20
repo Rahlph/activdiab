@@ -255,11 +255,28 @@ chart2.render();
                                 var tmp_data = [];
                                 var tmp_time = new Date().getTime();
 								var MAX_POINT = 1400;
+								var a = 0.6;
+								var b = 0.85;
                                 for (var i = 0; i < MAX_POINT;i++)
                                 {
 
 
-                                    tmp_data[i] = { x: new Date(tmp_time - i * 0.5 * 24 * 60 * 60 * 1000), y: (Math.random() * 1) + 0.50};
+                                    tmp_data[i] = { x: new Date(tmp_time - i * 0.5 * 24 * 60 * 60 * 1000), y: (Math.random() * a) + b};
+									
+									if (i > 75)
+									{
+										a = 2;
+										b = 0.5;
+										
+									}
+									
+																		if (i > 150)
+									{
+										a = 1.5;
+										b = 0.35;
+										
+									}
+									
                                    // tmp_data[i] = { x: new Date(tmp_time - i * 0.5 * 24 * 60 * 60 * 1000), y: Math.cos(5*(MAX_POINT-i))*Math.exp(-0.3*(MAX_POINT-i))+1};
                                     if (tmp_data[i].y < 0.75)
                                     {
