@@ -169,7 +169,7 @@ var chart2 = new CanvasJS.Chart("chartContainer2",
                         animationEnabled: true,
 			title:{
 				text: "Objectif calorique quotidien",
-				fontSize: 30
+				
 			},
 			toolTip: {
 				shared: true
@@ -191,6 +191,7 @@ var chart2 = new CanvasJS.Chart("chartContainer2",
 				name: "Activité réalisée",
 				legendText: "Activité réalisée",
 				showInLegend: false, 
+				 indexLabelFontSize: 25,
 				dataPoints:[
 				{label: "Lundi 14", y: 875,color :  "green"},
 				{label: "Mardi 15", y: 955,color :  "green"},
@@ -198,21 +199,27 @@ var chart2 = new CanvasJS.Chart("chartContainer2",
 				{label: "Jeudi 17", y: 925,color :  "green"},
 				{label: "Vendredi 18", y: 873,color :  "green"},
 				{label: "Samedi 19", y: 885,color :  "green"},
-				{label: "Dimanche 20", y: 521,color :  "yellow",indexLabel: "Acquisition en cours"}
+				{label: "Dimanche 20", y: 521,color :  "#0080FF",indexLabel: "Acquisition..."}
 
 				]
 			},
 			{
 				type: "column",	
 	
-				name: "Objectif calorifique minimum recommandé (Poids : 85kg)",
+				name: "Nombre de pas effectué",
 				legendText: "Objectif 10 000 Pas",
 				axisYType: "secondary",
 				        indexLabelFontSize: 25,
 				                              color: "green",
 				showInLegend: true,
 				dataPoints:[
-
+				{label: "Lundi 14", y: 10.3,color :  "green"},
+				{label: "Mardi 15", y: 11.25,color :  "green"},
+				{label: "Mercredi 16", y: 8.6,color :  "red"},
+				{label: "Jeudi 17", y: 10.9,color :  "green"},
+				{label: "Vendredi 18", y: 10.25,color :  "green"},
+				{label: "Samedi 19", y: 10.35,color :  "green"},
+				{label: "Dimanche 20", y: 6.1,color :  "#0080FF"}
 				]
 			}
 			
