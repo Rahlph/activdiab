@@ -360,8 +360,8 @@ chart2.render();
                             <button type="button" class="btn" onclick="getDay(chart);">Jour</button>
                             <button type="button" class="btn" onclick="return getWeek(chart);">Semaine</button>
                             <button type="button" class="btn " onclick="return getMonth(chart);">Mois</button>
+                            <button type="button" class="btn " style="margin-left: 20px" onclick="previous(chart);">Précédent</button>
                             <button type="button" class="btn " onclick="next(chart);">Suivant</button>
-                            <button type="button" class="btn " onclick="previous(chart);">Précédent</button>
                         </div>
                         <div id="chartContainer" style="height: 300px; width: 100%;">
                         </div>
