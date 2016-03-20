@@ -176,7 +176,7 @@ var chart2 = new CanvasJS.Chart("chartContainer2",
 				shared: true
 			},			
 			axisY: {
-				title: "Effort (kcal)",
+				title: "Energie dépensée (kcal)",
                                             minimum: 0,
                                             maximum: 1275,
 			},
@@ -189,7 +189,7 @@ var chart2 = new CanvasJS.Chart("chartContainer2",
 			data: [ 
 			{
 				type: "column",	
-				name: "Activité réalisée",
+				name: "Energie dépensée",
 				legendText: "Activité réalisée",
 				showInLegend: false, 
 				 indexLabelFontSize: 25,
