@@ -129,6 +129,7 @@
                                             text: "Evolution de la glycémie"
                                         },
                                         animationEnabled: true,
+										
                                         axisX:{
                                             valueFormatString: "DD-MMM" ,
                                             //interval: 1,
@@ -283,6 +284,7 @@ chart2.render();
                                     if (tmp_data[i].y < 0.75)
                                     {
                                         tmp_data[i].markerColor =  "red";
+										tmp_data[i].indexLabelFontSize =25;
                                         tmp_data[i].indexLabel =  "!";
 //tmp_data[i].markerType = "triangle";
                                     }
@@ -290,6 +292,7 @@ chart2.render();
 								 if (tmp_data[i].y > 1.4)
                                     {
                                         tmp_data[i].markerColor =  "yellow";
+										tmp_data[i].indexLabelFontSize =25;
                                         tmp_data[i].indexLabel =  "!";
 //tmp_data[i].markerType = "triangle";
                                     }
